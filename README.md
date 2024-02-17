@@ -55,8 +55,9 @@ Contribute to the repository and be a part of redefining the future with Pero's 
 
 ---
 
-![Pero's Skunkworks Logo](path/to/logo.png) <!-- Replace with the actual path to the logo image -->
+![peros logo blue github](https://github.com/Pero-s-Academy/Assignments/assets/126121348/bf57b941-2bdf-4020-9103-eb5454fb6c8e)
+
 
 **Pero's Skunkworks**: _Where Innovation Meets Action._
 
-![Innovation in Action](path/to/image.jpg) <!-- Replace with the actual path to an image showcasing innovation -->
+
