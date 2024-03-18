@@ -5,6 +5,7 @@ Welcome to the **Pero's Academy Badge Quest**, a 12-week journey where you'll em
 
 ## First Badge: Node-RED Basics to Bots 🥇
 Before the week ends, your first quest is to earn the ![IBM Node-RED: Basics to Bots Badge](https://www.ibm.com/training/badge/node-red-basics-to-bots). Node-RED is a powerful tool for building Internet of Things applications with a focus on simplicity and ease of use.
+
 ![image](https://github.com/Pero-s-Academy/Assignments/assets/126121348/63bb1dbe-5347-4655-b500-c6abc486c3c2)
 
 ### Steps to Earn Your Node-RED Badge
