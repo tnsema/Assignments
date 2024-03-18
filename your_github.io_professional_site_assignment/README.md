@@ -237,7 +237,7 @@ For any questions or assistance regarding this assignment, feel free to reach ou
 - **Community Resources:** Explore additional resources, forums, or online communities related to web development, design, and professional branding. Leveraging community resources can provide valuable insights, tips, and best practices for creating an outstanding profile.
 
 
-> [!NOTE] 📣 **Note:**
+> 📣 **Note:**
 > Remember that feedback and assistance are integral parts of the learning journey. Don't hesitate to reach out for help when needed, and actively contribute to the collective learning experience within the Pero's Academy community. Your engagement and collaboration with peers and instructors will enrich your learning experience and foster growth as a tech professional.
 ---
 
