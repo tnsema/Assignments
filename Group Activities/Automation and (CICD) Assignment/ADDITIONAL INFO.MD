@@ -1,4 +1,4 @@
-https://github.com/Pero-s-Academy/Assignments/blob/129b936787cece90770512fc394574590a3709b4/Group%20Activities/Automation%20and%20(CICD)%20Assignment/AUTOMATION%20ISSUE%20TO%20BE%20FIXED.png
+![Alt text](https://github.com/Pero-s-Academy/Assignments/blob/129b936787cece90770512fc394574590a3709b4/Group%20Activities/Automation%20and%20(CICD)%20Assignment/AUTOMATION%20ISSUE%20TO%20BE%20FIXED.png)
 ### Understanding Automation:
 
 **Group Research:**
