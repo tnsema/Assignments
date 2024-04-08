@@ -4,23 +4,23 @@ Welcome to the participation register for the Web Development Enhancement Assign
 
 ## Assignment Participation
 
-| Student Name          | GitHub Username      | Date Registered  |
-|-----------------------|----------------------|------------------|
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
-| [Full Name]           | [GitHub Username]    | [Date]           |
+| Student Name          | GitHub Username      | Date Registered  | Date of Submission |
+|-----------------------|----------------------|------------------|--------------------|
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             | 
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
+| [Full Name]           | [GitHub Username]    | [Date]           | [Date]             |
 
 
 Please ensure that you enter your details accurately and update the register promptly upon beginning the assignment.
