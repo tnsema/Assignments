@@ -2,16 +2,25 @@
 
 ### Assignment Details
 - **Title:** Implementing a Web Application Using IBM Carbon Design System
-- **Submission Deadline:** [Insert Deadline]
-- **Total Delegates:** [Insert Total Number of Delegates]
+- **Submission Deadline:** 30 April 2024
+- **Total Delegates:** 6-8
+
+---
 
 #### Delegate Information
+
 | Delegate ID | Name               | Email Address          | GitHub Repository URL                          | Submission Date | Review Status | Marks Awarded | Feedback Provided |
 |-------------|--------------------|------------------------|------------------------------------------------|-----------------|---------------|---------------|-------------------|
 | 1           | [Delegate Name 1]  | [Email Address 1]      | [GitHub URL 1]                                 | [Date 1]        | [Status 1]    | [Marks 1]     | [Yes/No]          |
 | 2           | [Delegate Name 2]  | [Email Address 2]      | [GitHub URL 2]                                 | [Date 2]        | [Status 2]    | [Marks 2]     | [Yes/No]          |
-| ...         | ...                | ...                    | ...                                            | ...             | ...           | ...           | ...               |
-| N           | [Delegate Name N]  | [Email Address N]      | [GitHub URL N]                                 | [Date N]        | [Status N]    | [Marks N]     | [Yes/No]          |
+| 3           | [Delegate Name 1]  | [Email Address 1]      | [GitHub URL 1]                                 | [Date 1]        | [Status 1]    | [Marks 1]     | [Yes/No]          |
+| 4           | [Delegate Name 2]  | [Email Address 2]      | [GitHub URL 2]                                 | [Date 2]        | [Status 2]    | [Marks 2]     | [Yes/No]          |
+| 5           | [Delegate Name 1]  | [Email Address 1]      | [GitHub URL 1]                                 | [Date 1]        | [Status 1]    | [Marks 1]     | [Yes/No]          |
+| 6           | [Delegate Name 2]  | [Email Address 2]      | [GitHub URL 2]                                 | [Date 2]        | [Status 2]    | [Marks 2]     | [Yes/No]          |
+| 7           | [Delegate Name 1]  | [Email Address 1]      | [GitHub URL 1]                                 | [Date 1]        | [Status 1]    | [Marks 1]     | [Yes/No]          |
+| 8           | [Delegate Name 2]  | [Email Address 2]      | [GitHub URL 2]                                 | [Date 2]        | [Status 2]    | [Marks 2]     | [Yes/No]          |
+
+---
 
 ### Key:
 - **Delegate ID:** Unique identifier for each delegate.
