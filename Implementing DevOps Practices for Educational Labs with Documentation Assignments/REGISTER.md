@@ -4,8 +4,8 @@ This document maintains a list of students who have enrolled in the DevOps Pract
 
 ## Class Information
 - **Course Name:** DevOps Practices for Educational Labs
-- **Instructor:** [Instructor's Name]
-- **Semester:** [Semester Year]
+- **Instructor:** Oliver Bodemer/Raydo Matthee
+- **Semester:** Q2
 
 ## Enrollment List
 
@@ -17,5 +17,5 @@ This document maintains a list of students who have enrolled in the DevOps Pract
 | ...        | ...                 | ...                       | ...               | ...                                            |
 
 ## Notes
-- **Submission Deadline:** 30 April 2024
+- **Submission Deadline:** 31 May 2024
 - **Contact Information:** For any queries, please email raydo@pero.co.za
