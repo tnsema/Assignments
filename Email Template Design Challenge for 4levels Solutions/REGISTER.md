@@ -5,7 +5,7 @@ Please add your details to the table below if you are participating in the Email
 | Name                | Email Address                 | Submission Title        | Date Submitted |
 |---------------------|-------------------------------|-------------------------|----------------|
 | [Your Full Name]    | [Your Email Address]          | [Your Submission Title] | [MM/DD/YYYY]   |
-|  Malcolm Mukorera   | malcolmtmukorera@outlook.com  |                         |                |
-|                     |                               |                         |                |
+|  Malcolm Mukorera   | malcolmtmukorera@outlook.com  |                         |    ken lunde            |kenbutshidibule1@gmail.com
+|                     |                               |                         |  15/04/2024              |
 
 **Note:** Please update the table by adding a new row for your entry. Do not modify or delete entries from other participants.
