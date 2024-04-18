@@ -1,6 +1,12 @@
 import os
-import requests
+import requests # type: ignore
 import subprocess
+
+def check_git_repository():
+    try:
+        subprocess.run(['git', 'rev-parse', '--is-inside-work-tree'], check=True, stdout=subprocess.PIPE)
+    except subprocess.CalledProcessError:
+        raise EnvironmentError("This directory is not a Git repository.")
 
 def get_forks():
     # Fetch the GitHub token from the environment variable
@@ -36,6 +42,8 @@ def git_commit_and_push():
         print("No changes to commit.")
 
 if __name__ == "__main__":
+    os.chdir("c:/Users/RaydoMatthee/Documents/GitRepositories/Assignments/Forking Pero's Academy Repository - Assignment")  # Ensure correct directory
+    check_git_repository()  # Check if the directory is a Git repository
     forks = get_forks()
     update_register(forks)
     git_commit_and_push()

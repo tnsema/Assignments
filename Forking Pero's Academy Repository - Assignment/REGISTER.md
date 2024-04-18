@@ -1,7 +1,9 @@
 # Fork Registry
 
-| Student Username   | Fork URL                                  |
-|---------------------|-------------------------------------------|
-| student_user1       | https://github.com/student_user1/repo     |
-| student_user2       | https://github.com/student_user2/repo     |
-| student_user3       | https://github.com/student_user3/repo     |
+| Student Username | Fork URL |
+|------------------|----------|
+| MalcolmMukorera | https://github.com/MalcolmMukorera/Assignments |
+| mloyi | https://github.com/mloyi/Assignments |
+| Elliott29 | https://github.com/Elliott29/Assignments |
+| Mw4mba | https://github.com/Mw4mba/Assignments |
+| burnt-exe | https://github.com/burnt-exe/Assignments |
