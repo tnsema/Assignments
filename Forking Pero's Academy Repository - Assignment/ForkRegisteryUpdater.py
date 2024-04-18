@@ -1,5 +1,5 @@
 import os
-import requests # type: ignore
+import requests
 import subprocess
 
 def check_git_repository():
@@ -22,15 +22,18 @@ def get_forks():
         raise Exception(f"Failed to fetch data: {response.status_code} {response.reason}")
     
     forks = response.json()
-    return [(fork['owner']['login'], fork['html_url']) for fork in forks]
+    # Include the creation date in the return value
+    return [(fork['owner']['login'], fork['html_url'], fork['created_at']) for fork in forks]
 
 def update_register(forks):
     with open('REGISTER.md', 'w') as file:
         file.write('# Fork Registry\n\n')
-        file.write('| Student Username | Fork URL |\n')
-        file.write('|------------------|----------|\n')
-        for username, url in forks:
-            file.write(f'| {username} | {url} |\n')
+        file.write('| Student Username | Fork URL | Date Created |\n')
+        file.write('|------------------|----------|--------------|\n')
+        for username, url, created_at in forks:
+            # Format the date to only show YYYY-MM-DD
+            date_created = created_at.split("T")[0]  # Splits the datetime and takes only the date part
+            file.write(f'| {username} | {url} | {date_created} |\n')
 
 def git_commit_and_push():
     # Ensure that changes are only committed if there are changes
