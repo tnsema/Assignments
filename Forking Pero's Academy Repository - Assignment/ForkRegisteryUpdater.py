@@ -1,5 +1,5 @@
 import os
-import requests
+import requests # type: ignore
 import subprocess
 
 def check_git_repository():
