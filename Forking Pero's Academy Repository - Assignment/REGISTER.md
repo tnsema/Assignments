@@ -2,7 +2,6 @@
 
 | Student Username | Fork URL | Date Created |
 |------------------|----------|--------------|
-| MrPlenty8 | https://github.com/MrPlenty8/Assignments | 2024-04-19 
 | ThatCodeGuySA | https://github.com/ThatCodeGuySA/Assignments | 2024-04-19 
 | MalcolmMukorera | https://github.com/MalcolmMukorera/Assignments | 2024-04-18 |
 | mloyi | https://github.com/mloyi/Assignments | 2024-04-18 |
