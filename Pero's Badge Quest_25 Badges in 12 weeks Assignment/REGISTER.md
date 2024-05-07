@@ -15,7 +15,7 @@ This document maintains a list of students who have enrolled in the Pero's Badge
 | Student ID | Name                | Email Address             | Submission Status | Project Link                                   |
 |------------|---------------------|---------------------------|-------------------|------------------------------------------------|
 | 001        | ...                 | ...                       | Not yet Submitted | [Link to GitHub repo](https://github.com)      |
-| ...        | ...                 | ...                       | ...               | ...                                            |
+| 009        | tnsema              | thobilesema@gmail.com     | Started           | [Thobile Credly](https://www.credly.com/users/thobile-sema) |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
