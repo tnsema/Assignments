@@ -15,7 +15,7 @@ This document maintains a list of students who have enrolled in the DevOps Pract
 | 002        | John Smith          | john.smith@example.com    | Pending           | N/A                                            |
 | 003        | Sam Brown           | sam.brown@example.com     | Submitted         | [Link to GitHub repo](https://github.com)      |
 | 005        | Malusi Mthiyane     | thatcodeguysa@gmail.com   | ...               | https://github.com/ThatCodeGuySA               |
-| ...        | ...                 | ...                       | ...               | ...                                            |
+| 006      | Inacio                 | Inacio@skunkworks.africa                | Pending            |                                           |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
