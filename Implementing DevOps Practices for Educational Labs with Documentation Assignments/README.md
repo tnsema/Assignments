@@ -5,7 +5,7 @@
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-blue.svg)
 ![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-blue.svg)
 
-![DevOps Graphic]https://github.com/Pero-s-Academy/Assignments/assets/126121348/d7481046-a4a4-4fa5-896f-2156231fed4b)
+![DevOps Graphic](https://github.com/Pero-s-Academy/Assignments/assets/126121348/d7481046-a4a4-4fa5-896f-2156231fed4b)
 
 
 ## Overview
