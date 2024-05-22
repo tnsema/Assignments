@@ -5,6 +5,8 @@
 ![GitHub Actions](https://img.shields.io/badge/GitHub%20Actions-CI%2FCD-blue.svg)
 ![Jenkins](https://img.shields.io/badge/Jenkins-CI%2FCD-blue.svg)
 
+![DevOps Graphic](https://www.devopsschool.com/blog/wp-content/uploads/2021/02/DevOps-Tools.png)
+
 ## Overview
 
 This assignment involves setting up a virtual lab environment using DevOps tools and practices and creating a detailed tutorial and lab guide. The objective is to demonstrate technical proficiency and the ability to communicate complex information effectively.
@@ -111,3 +113,9 @@ project-root/
     ├── demo-video.mp4
     └── demo-link.txt
 ```
+
+---
+
+![DevOps Background](https://www.agileconnection.com/sites/default/files/DXC_Tra_DevOps_Fig02.jpg)
+
+This assignment is designed to develop both technical skills in DevOps and cloud technologies and the ability to produce educational content. These skills are crucial for future roles as educators, developers, or IT professionals.
