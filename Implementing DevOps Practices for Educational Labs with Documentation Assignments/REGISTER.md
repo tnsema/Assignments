@@ -14,7 +14,7 @@ This document maintains a list of students who have enrolled in the DevOps Pract
 | 001        | Elie Loji            | elie@pero.co.za      | Pending       | [Link to GitHub repo](https://github.com/Elliott29)      |
 | 005        | Malusi Mthiyane     | thatcodeguysa@gmail.com   | ...               | https://github.com/ThatCodeGuySA               |
 | 006        | Inacio                 | Inacio@skunkworks.africa                | Pending            |                                           |
-| ...        | ...                 | ...                       | ...               | ...                                            |
+| 004        | Andre Mwamba        | a.mwamba@skunkworks.africa|pendiing...        | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
