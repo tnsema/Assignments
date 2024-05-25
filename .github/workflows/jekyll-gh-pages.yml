@@ -51,16 +51,18 @@ jobs:
       - name: Ensure REGISTER.md exists and contains Status column
         run: |
           echo "Checking and updating REGISTER.md files..."
-          for dir in $(ls -d Assignments/*/); do
-            register_file="$dir/REGISTER.md"
-            if [ ! -f "$register_file" ]; then
-              echo "Creating REGISTER.md in $dir"
-              echo -e "| Name | Status |\n|------|--------|" > "$register_file"
-            else
-              if ! grep -q "| Status |" "$register_file"; then
-                echo "Updating REGISTER.md in $dir"
-                sed -i '1s/$/| Status |/' "$register_file"
-                sed -i '2s/$/|--------|/' "$register_file"
+          for dir in $(ls -d */); do
+            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
+              register_file="$dir/REGISTER.md"
+              if [ ! -f "$register_file" ]; then
+                echo "Creating REGISTER.md in $dir"
+                echo -e "| Name | Status |\n|------|--------|" > "$register_file"
+              else
+                if ! grep -q "| Status |" "$register_file"; then
+                  echo "Updating REGISTER.md in $dir"
+                  sed -i '1s/$/| Status |/' "$register_file"
+                  sed -i '2s/$/|--------|/' "$register_file"
+                fi
               fi
             fi
           done
@@ -81,27 +83,29 @@ jobs:
           
           leaderboard=()
           
-          for dir in $(ls -d Assignments/*/); do
-            register_file="$dir/REGISTER.md"
-            if [ -f "$register_file" ]; then
-              assignment_name=$(basename "$dir")
-              status=$(grep -i "| Status |" "$register_file" | tail -n +3 | cut -d'|' -f3 | xargs)
-              case "$status" in
-                "In Progress")
-                  badge="![In Progress](https://img.shields.io/badge/status-in--progress-yellow)"
-                  ;;
-                "Completed")
-                  badge="![Completed](https://img.shields.io/badge/status-completed-brightgreen)"
-                  ;;
-                "Not Started")
-                  badge="![Not Started](https://img.shields.io/badge/status-not--started-lightgrey)"
-                  ;;
-                *)
-                  badge="![Unknown](https://img.shields.io/badge/status-unknown-lightgrey)"
-                  ;;
-              esac
-              priority=${status_priority["$status"]}
-              leaderboard+=("$priority|$assignment_name|$badge")
+          for dir in $(ls -d */); do
+            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
+              register_file="$dir/REGISTER.md"
+              if [ -f "$register_file" ]; then
+                assignment_name=$(basename "$dir")
+                status=$(grep -i "| Status |" "$register_file" | tail -n +3 | cut -d'|' -f3 | xargs)
+                case "$status" in
+                  "In Progress")
+                    badge="![In Progress](https://img.shields.io/badge/status-in--progress-yellow)"
+                    ;;
+                  "Completed")
+                    badge="![Completed](https://img.shields.io/badge/status-completed-brightgreen)"
+                    ;;
+                  "Not Started")
+                    badge="![Not Started](https://img.shields.io/badge/status-not--started-lightgrey)"
+                    ;;
+                  *)
+                    badge="![Unknown](https://img.shields.io/badge/status-unknown-lightgrey)"
+                    ;;
+                esac
+                priority=${status_priority["$status"]}
+                leaderboard+=("$priority|$assignment_name|$badge")
+              fi
             fi
           done
           
@@ -121,11 +125,15 @@ jobs:
       - name: Update Assignments README.md
         run: |
           echo "Updating Assignments README.md..."
-          cat summary.md > Assignments/README.md
+          cat summary.md > README.md
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add Assignments/README.md
-          git add Assignments/*/REGISTER.md
+          git add README.md
+          for dir in $(ls -d */); do
+            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
+              git add "$dir/REGISTER.md"
+            fi
+          done
           git commit -m "Update assignment registration leaderboard and ensure REGISTER.md"
           git push
           echo "Assignments README.md updated."
@@ -134,27 +142,31 @@ jobs:
         run: |
           echo "Generating HTML files for each assignment..."
           sidebar="<nav><ul>"
-          for dir in $(ls -d Assignments/*/); do
-            assignment_name=$(basename "$dir")
-            sidebar+="<li><a href=\"$assignment_name.html\">$assignment_name</a></li>"
+          for dir in $(ls -d */); do
+            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
+              assignment_name=$(basename "$dir")
+              sidebar+="<li><a href=\"$assignment_name.html\">$assignment_name</a></li>"
+            fi
           done
           sidebar+="</ul></nav>"
 
-          for dir in $(ls -d Assignments/*/); do
-            assignment_name=$(basename "$dir")
-            register_file="$dir/REGISTER.md"
-            task_file="$dir/README.md"
-            
-            # Generate sidebar for registered students
-            student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
-            student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
-            
-            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $task_file | markdown)$student_sidebar</main></body></html>"
-            echo "$html_content" > "$assignment_name.html"
+          for dir in $(ls -d */); do
+            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
+              assignment_name=$(basename "$dir")
+              register_file="$dir/REGISTER.md"
+              task_file="$dir/README.md"
+              
+              # Generate sidebar for registered students
+              student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
+              student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
+              
+              html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $task_file | markdown)$student_sidebar</main></body></html>"
+              echo "$html_content" > "$assignment_name.html"
+            fi
           done
 
           # Generate index.html for the repo root directory
-          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat Assignments/README.md | markdown)</main></body></html>"
+          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat README.md | markdown)</main></body></html>"
           echo "$html_content" > index.html
 
           echo "HTML files generated successfully."
@@ -190,13 +202,15 @@ jobs:
       - name: Validate REGISTER.md Files
         run: |
           echo "Validating REGISTER.md files..."
-          for dir in $(ls -d Assignments/*/); do
-            register_file="$dir/REGISTER.md"
-            if [ -f "$register_file" ]; then
-              # Add validation logic here
-              if ! grep -q "| Status |" "$register_file"; then
-                echo "Error: $register_file does not contain Status column."
-                exit 1
+          for dir in $(ls -d */); do
+            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
+              register_file="$dir/REGISTER.md"
+              if [ -f "$register_file" ]; then
+                # Add validation logic here
+                if ! grep -q "| Status |" "$register_file"; then
+                  echo "Error: $register_file does not contain Status column."
+                  exit 1
+                fi
               fi
             fi
           done
