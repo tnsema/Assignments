@@ -51,7 +51,7 @@ jobs:
       - name: Ensure REGISTER.md exists and contains Status column
         run: |
           echo "Checking and updating REGISTER.md files..."
-          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+          for dir in $(ls -d Assignments/*/); do
             register_file="$dir/REGISTER.md"
             if [ ! -f "$register_file" ]; then
               echo "Creating REGISTER.md in $dir"
@@ -81,7 +81,7 @@ jobs:
           
           leaderboard=()
           
-          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+          for dir in $(ls -d Assignments/*/); do
             register_file="$dir/REGISTER.md"
             if [ -f "$register_file" ]; then
               assignment_name=$(basename "$dir")
@@ -121,11 +121,11 @@ jobs:
       - name: Update Assignments README.md
         run: |
           echo "Updating Assignments README.md..."
-          cat summary.md > Pero-s-Academy/Assignments/README.md
+          cat summary.md > Assignments/README.md
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add Pero-s-Academy/Assignments/README.md
-          git add Pero-s-Academy/Assignments/*/REGISTER.md
+          git add Assignments/README.md
+          git add Assignments/*/REGISTER.md
           git commit -m "Update assignment registration leaderboard and ensure REGISTER.md"
           git push
           echo "Assignments README.md updated."
@@ -134,13 +134,13 @@ jobs:
         run: |
           echo "Generating HTML files for each assignment..."
           sidebar="<nav><ul>"
-          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+          for dir in $(ls -d Assignments/*/); do
             assignment_name=$(basename "$dir")
             sidebar+="<li><a href=\"$assignment_name.html\">$assignment_name</a></li>"
           done
           sidebar+="</ul></nav>"
 
-          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+          for dir in $(ls -d Assignments/*/); do
             assignment_name=$(basename "$dir")
             register_file="$dir/REGISTER.md"
             task_file="$dir/README.md"
@@ -154,7 +154,7 @@ jobs:
           done
 
           # Generate index.html for the repo root directory
-          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat Pero-s-Academy/Assignments/README.md | markdown)</main></body></html>"
+          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat Assignments/README.md | markdown)</main></body></html>"
           echo "$html_content" > index.html
 
           echo "HTML files generated successfully."
@@ -190,7 +190,7 @@ jobs:
       - name: Validate REGISTER.md Files
         run: |
           echo "Validating REGISTER.md files..."
-          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+          for dir in $(ls -d Assignments/*/); do
             register_file="$dir/REGISTER.md"
             if [ -f "$register_file" ]; then
               # Add validation logic here
