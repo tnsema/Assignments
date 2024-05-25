@@ -142,8 +142,14 @@ jobs:
 
           for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
             assignment_name=$(basename "$dir")
-            register_file="$dir/README.md"
-            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $register_file | markdown)</main></body></html>"
+            register_file="$dir/REGISTER.md"
+            task_file="$dir/README.md"
+            
+            # Generate sidebar for registered students
+            student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
+            student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
+            
+            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $task_file | markdown)$student_sidebar</main></body></html>"
             echo "$html_content" > "$assignment_name.html"
           done
 
@@ -154,7 +160,7 @@ jobs:
           echo "HTML files generated successfully."
           
           git add *.html
-          git commit -m "Generate HTML files with navigation sidebar"
+          git commit -m "Generate HTML files with navigation sidebar and registered students"
           git push
           echo "HTML files committed and pushed."
 
@@ -164,22 +170,12 @@ jobs:
           cat << "EOF" >> ~/.bashrc
 
 cat << "BANNER"
-                                                                
-               \    /   _   |   _   _   ._ _    _             
-                \/\/   (/_  |  (_  (_)  | | |  (/_            
-                                                                
-                                                                
-                                                                                                          
-                                                                
-                            _|_   _                          
-                             |_  (_)                         
-                                                                
-                                                                                             
-                                                                
-  _                                                             
- |_)   _   ._   _   /   _     /\    _   _.   _|   _   ._ _      
- |    (/_  |   (_)     _>    /--\  (_  (_|  (_|  (/_  | | |  \/ 
-                                                             /    
+ _    _      _                            _          _____                _             
+| |  | |    | |                          | |        / ____|              | |            
+| |  | | ___| | ___ ___  _ __ ___   ___  | |_ ___  | |     _ __ __ _  ___| | _____ _ __ 
+| |  | |/ _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ | |    | '__/ _` |/ __| |/ / _ \ '__|
+| |__| |  __/ | (_| (_) | | | | | |  __/ | ||  __/ | |____| | | (_| | (__|   <  __/ |   
+ \____/ \___|_|\___\___/|_| |_| |_|\___|  \__\___|  \_____|_|  \__,_|\___|_|\_\___|_|   
                                                                                        
                                                                                        
 Welcome to Pero's Academy!
