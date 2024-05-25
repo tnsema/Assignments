@@ -136,6 +136,7 @@ jobs:
       - name: Generate HTML Files with Navigation Sidebar
         run: |
           echo "Generating HTML files for each assignment..."
+          sudo apt-get install -y pandoc
           sidebar="<nav><ul>"
           find . -mindepth 1 -maxdepth 1 -type d \( ! -name ".github" ! -name "Lib" ! -name "Group Activities" \) | while read -r dir; do
             assignment_name=$(basename "$dir")
@@ -152,12 +153,12 @@ jobs:
             student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
             student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
             
-            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $task_file | markdown)$student_sidebar</main></body></html>"
+            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(pandoc $task_file) $student_sidebar</main></body></html>"
             echo "$html_content" > "$assignment_name.html"
           done
 
           # Generate index.html for the repo root directory
-          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat README.md | markdown)</main></body></html>"
+          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(pandoc README.md)</main></body></html>"
           echo "$html_content" > index.html
 
           echo "HTML files generated successfully."
@@ -192,7 +193,7 @@ jobs:
           echo "Validating REGISTER.md files..."
           find . -mindepth 1 -maxdepth 1 -type d \( ! -name ".github" ! -name "Lib" ! -name "Group Activities" \) | while read -r dir; do
             register_file="$dir/REGISTER.md"
-            if [ -f "$register_file" ]; then
+            if [ -f "$register_file" ];then
               if ! grep -q "| Status |" "$register_file"; then
                 echo "Error: $register_file does not contain Status column."
                 exit 1
