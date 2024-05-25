@@ -150,6 +150,11 @@ jobs:
             register_file="$dir/REGISTER.md"
             task_file="$dir/README.md"
             
+            if [ ! -f "$task_file" ]; then
+              echo "Error: $task_file does not exist. Skipping $assignment_name."
+              continue
+            fi
+            
             # Generate sidebar for registered students
             student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
             student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
@@ -159,8 +164,12 @@ jobs:
           done
 
           # Generate index.html for the repo root directory
-          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(pandoc README.md)</main></body></html>"
-          echo "$html_content" > index.html
+          if [ -f "README.md" ]; then
+            html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(pandoc README.md)</main></body></html>"
+            echo "$html_content" > index.html
+          else
+            echo "Error: README.md does not exist in the repo root. Skipping index.html generation."
+          fi
 
           echo "HTML files generated successfully."
           
