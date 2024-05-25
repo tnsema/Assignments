@@ -142,8 +142,8 @@ jobs:
 
           for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
             assignment_name=$(basename "$dir")
-            register_file="$dir/REGISTER.md"
-            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main>$(cat $register_file | markdown)</main></body></html>"
+            register_file="$dir/README.md"
+            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $register_file | markdown)</main></body></html>"
             echo "$html_content" > "$assignment_name.html"
           done
 
@@ -158,40 +158,62 @@ jobs:
           git push
           echo "HTML files committed and pushed."
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: [build, summarize_and_create_html]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
-  # Validation job (optional but recommended)
-  validate:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Validate REGISTER.md Files
+      - name: Add ASCII Art Greeting
         run: |
-          echo "Validating REGISTER.md files..."
-          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
-            register_file="$dir/REGISTER.md"
-            if [ -f "$register_file" ]; then
-              # Add validation logic here
-              if ! grep -q "| Status |" "$register_file"; then
-                echo "Error: $register_file does not contain Status column."
-                exit 1
-              fi
-            fi
-          done
-          echo "Validation complete."
+          echo "Adding ASCII art greeting..."
+          cat << "EOF" >> ~/.bashrc
+
+cat << "BANNER"
+ _    _      _                            _          _____                _             
+| |  | |    | |                          | |        / ____|              | |            
+| |  | | ___| | ___ ___  _ __ ___   ___  | |_ ___  | |     _ __ __ _  ___| | _____ _ __ 
+| |  | |/ _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ | |    | '__/ _` |/ __| |/ / _ \ '__|
+| |__| |  __/ | (_| (_) | | | | | |  __/ | ||  __/ | |____| | | (_| | (__|   <  __/ |   
+ \____/ \___|_|\___\___/|_| |_| |_|\___|  \__\___|  \_____|_|  \__,_|\___|_|\_\___|_|   
+                                                                                       
+                                                                                       
+Welcome to Pero's Academy!
+What are you coding today?
+Raydo is watching you! Dream Big
+BANNER
+
+EOF
+          echo "ASCII art greeting added."
+
+     # Deployment job
+     deploy:
+       environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
+       runs-on: ubuntu-latest
+       needs: [build, summarize_and_create_html]
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v4
+
+         - name: Deploy to GitHub Pages
+           id: deployment
+           uses: actions/deploy-pages@v4
+
+     # Validation job (optional but recommended)
+     validate:
+       runs-on: ubuntu-latest
+       needs: build
+       steps:
+         - name: Checkout
+           uses: actions/checkout@v4
+
+         - name: Validate REGISTER.md Files
+           run: |
+             echo "Validating REGISTER.md files..."
+             for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+               register_file="$dir/REGISTER.md"
+               if [ -f "$register_file" ]; then
+                 # Add validation logic here
+                 if ! grep -q "| Status |" "$register_file"; then
+                   echo "Error: $register_file does not contain Status column."
+                   exit 1
+                 fi
+               fi
+             done
+             echo "Validation complete."
