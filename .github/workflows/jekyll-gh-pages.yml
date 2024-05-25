@@ -167,9 +167,9 @@ jobs:
       - name: Add ASCII Art Greeting
         run: |
           echo "Adding ASCII art greeting..."
-          cat << "EOF" >> ~/.bashrc
+          cat << 'EOF' >> ~/.bashrc
 
-cat << "BANNER"
+cat << 'BANNER'
  _    _      _                            _          _____                _             
 | |  | |    | |                          | |        / ____|              | |            
 | |  | | ___| | ___ ___  _ __ ___   ___  | |_ ___  | |     _ __ __ _  ___| | _____ _ __ 
