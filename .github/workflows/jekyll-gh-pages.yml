@@ -1,4 +1,4 @@
-# Workflow for building and deploying a Jekyll site to GitHub Pages
+# Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
@@ -51,18 +51,16 @@ jobs:
       - name: Ensure REGISTER.md exists and contains Status column
         run: |
           echo "Checking and updating REGISTER.md files..."
-          for dir in $(ls -d */); do
-            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
-              register_file="$dir/REGISTER.md"
-              if [ ! -f "$register_file" ]; then
-                echo "Creating REGISTER.md in $dir"
-                echo -e "| Name | Status |\n|------|--------|" > "$register_file"
-              else
-                if ! grep -q "| Status |" "$register_file"; then
-                  echo "Updating REGISTER.md in $dir"
-                  sed -i '1s/$/| Status |/' "$register_file"
-                  sed -i '2s/$/|--------|/' "$register_file"
-                fi
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            register_file="$dir/REGISTER.md"
+            if [ ! -f "$register_file" ]; then
+              echo "Creating REGISTER.md in $dir"
+              echo -e "| Name | Status |\n|------|--------|" > "$register_file"
+            else
+              if ! grep -q "| Status |" "$register_file"; then
+                echo "Updating REGISTER.md in $dir"
+                sed -i '1s/$/| Status |/' "$register_file"
+                sed -i '2s/$/|--------|/' "$register_file"
               fi
             fi
           done
@@ -83,29 +81,27 @@ jobs:
           
           leaderboard=()
           
-          for dir in $(ls -d */); do
-            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
-              register_file="$dir/REGISTER.md"
-              if [ -f "$register_file" ]; then
-                assignment_name=$(basename "$dir")
-                status=$(grep -i "| Status |" "$register_file" | tail -n +3 | cut -d'|' -f3 | xargs)
-                case "$status" in
-                  "In Progress")
-                    badge="![In Progress](https://img.shields.io/badge/status-in--progress-yellow)"
-                    ;;
-                  "Completed")
-                    badge="![Completed](https://img.shields.io/badge/status-completed-brightgreen)"
-                    ;;
-                  "Not Started")
-                    badge="![Not Started](https://img.shields.io/badge/status-not--started-lightgrey)"
-                    ;;
-                  *)
-                    badge="![Unknown](https://img.shields.io/badge/status-unknown-lightgrey)"
-                    ;;
-                esac
-                priority=${status_priority["$status"]}
-                leaderboard+=("$priority|$assignment_name|$badge")
-              fi
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            register_file="$dir/REGISTER.md"
+            if [ -f "$register_file" ]; then
+              assignment_name=$(basename "$dir")
+              status=$(grep -i "| Status |" "$register_file" | tail -n +3 | cut -d'|' -f3 | xargs)
+              case "$status" in
+                "In Progress")
+                  badge="![In Progress](https://img.shields.io/badge/status-in--progress-yellow)"
+                  ;;
+                "Completed")
+                  badge="![Completed](https://img.shields.io/badge/status-completed-brightgreen)"
+                  ;;
+                "Not Started")
+                  badge="![Not Started](https://img.shields.io/badge/status-not--started-lightgrey)"
+                  ;;
+                *)
+                  badge="![Unknown](https://img.shields.io/badge/status-unknown-lightgrey)"
+                  ;;
+              esac
+              priority=${status_priority["$status"]}
+              leaderboard+=("$priority|$assignment_name|$badge")
             fi
           done
           
@@ -125,15 +121,11 @@ jobs:
       - name: Update Assignments README.md
         run: |
           echo "Updating Assignments README.md..."
-          cat summary.md > README.md
+          cat summary.md > Pero-s-Academy/Assignments/README.md
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          for dir in $(ls -d */); do
-            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
-              git add "$dir/REGISTER.md"
-            fi
-          done
+          git add Pero-s-Academy/Assignments/README.md
+          git add Pero-s-Academy/Assignments/*/REGISTER.md
           git commit -m "Update assignment registration leaderboard and ensure REGISTER.md"
           git push
           echo "Assignments README.md updated."
@@ -142,31 +134,27 @@ jobs:
         run: |
           echo "Generating HTML files for each assignment..."
           sidebar="<nav><ul>"
-          for dir in $(ls -d */); do
-            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
-              assignment_name=$(basename "$dir")
-              sidebar+="<li><a href=\"$assignment_name.html\">$assignment_name</a></li>"
-            fi
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            assignment_name=$(basename "$dir")
+            sidebar+="<li><a href=\"$assignment_name.html\">$assignment_name</a></li>"
           done
           sidebar+="</ul></nav>"
 
-          for dir in $(ls -d */); do
-            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
-              assignment_name=$(basename "$dir")
-              register_file="$dir/REGISTER.md"
-              task_file="$dir/README.md"
-              
-              # Generate sidebar for registered students
-              student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
-              student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
-              
-              html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $task_file | markdown)$student_sidebar</main></body></html>"
-              echo "$html_content" > "$assignment_name.html"
-            fi
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            assignment_name=$(basename "$dir")
+            register_file="$dir/REGISTER.md"
+            task_file="$dir/README.md"
+            
+            # Generate sidebar for registered students
+            student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
+            student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
+            
+            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(cat $task_file | markdown)$student_sidebar</main></body></html>"
+            echo "$html_content" > "$assignment_name.html"
           done
 
           # Generate index.html for the repo root directory
-          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat README.md | markdown)</main></body></html>"
+          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat Pero-s-Academy/Assignments/README.md | markdown)</main></body></html>"
           echo "$html_content" > index.html
 
           echo "HTML files generated successfully."
@@ -175,6 +163,28 @@ jobs:
           git commit -m "Generate HTML files with navigation sidebar and registered students"
           git push
           echo "HTML files committed and pushed."
+
+      - name: Add ASCII Art Greeting
+        run: |
+          echo "Adding ASCII art greeting..."
+          cat << 'EOF' >> ~/.bashrc
+
+cat << 'BANNER'
+ _    _      _                            _          _____                _             
+| |  | |    | |                          | |        / ____|              | |            
+| |  | | ___| | ___ ___  _ __ ___   ___  | |_ ___  | |     _ __ __ _  ___| | _____ _ __ 
+| |  | |/ _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ | |    | '__/ _` |/ __| |/ / _ \ '__|
+| |__| |  __/ | (_| (_) | | | | | |  __/ | ||  __/ | |____| | | (_| | (__|   <  __/ |   
+ \____/ \___|_|\___\___/|_| |_| |_|\___|  \__\___|  \_____|_|  \__,_|\___|_|\_\___|_|   
+                                                                                       
+                                                                                       
+Welcome to Pero's Academy!
+What are you coding today?
+Raydo is watching you! Dream Big
+BANNER
+
+EOF
+          echo "ASCII art greeting added."
 
   # Deployment job
   deploy:
@@ -202,15 +212,13 @@ jobs:
       - name: Validate REGISTER.md Files
         run: |
           echo "Validating REGISTER.md files..."
-          for dir in $(ls -d */); do
-            if [[ "$dir" != ".github/" && "$dir" != "Lib/" && "$dir" != "Group Activities/" ]]; then
-              register_file="$dir/REGISTER.md"
-              if [ -f "$register_file" ]; then
-                # Add validation logic here
-                if ! grep -q "| Status |" "$register_file"; then
-                  echo "Error: $register_file does not contain Status column."
-                  exit 1
-                fi
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            register_file="$dir/REGISTER.md"
+            if [ -f "$register_file" ]; then
+              # Add validation logic here
+              if ! grep -q "| Status |" "$register_file"; then
+                echo "Error: $register_file does not contain Status column."
+                exit 1
               fi
             fi
           done
