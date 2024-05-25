@@ -196,8 +196,9 @@ jobs:
             register_file="$dir/REGISTER.md"
             if [ -f "$register_file" ];then
               if ! grep -q "| Status |" "$register_file"; then
-                echo "Error: $register_file does not contain Status column."
-                exit 1
+                echo "Adding missing Status column to $register_file"
+                sed -i '1s/$/| Status |/' "$register_file"
+                sed -i '2s/$/|--------|/' "$register_file"
               fi
             fi
           done
