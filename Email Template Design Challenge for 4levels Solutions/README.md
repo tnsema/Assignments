@@ -7,7 +7,7 @@ Participate in the Email Template Design Challenge organized by Pero's Academy i
 Develop three HTML email templates that clearly communicate the benefits of 4levels Solutions' data retention services. These templates should be visually appealing, functional, and align with our branding guidelines.
 
 ## Deadline
-- **Submission Deadline**: April 15, 2024
+- **Submission Deadline**: April 19, 2024
 
 ## Reward
 - **Cash Prize**: R750 for the best template
