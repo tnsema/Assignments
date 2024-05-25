@@ -164,28 +164,6 @@ jobs:
           git push
           echo "HTML files committed and pushed."
 
-      - name: Add ASCII Art Greeting
-        run: |
-          echo "Adding ASCII art greeting..."
-          cat << 'EOF' >> ~/.bashrc
-
-cat << 'BANNER'
- _    _      _                            _          _____                _             
-| |  | |    | |                          | |        / ____|              | |            
-| |  | | ___| | ___ ___  _ __ ___   ___  | |_ ___  | |     _ __ __ _  ___| | _____ _ __ 
-| |  | |/ _ \ |/ __/ _ \| '_ ` _ \ / _ \ | __/ _ \ | |    | '__/ _` |/ __| |/ / _ \ '__|
-| |__| |  __/ | (_| (_) | | | | | |  __/ | ||  __/ | |____| | | (_| | (__|   <  __/ |   
- \____/ \___|_|\___\___/|_| |_| |_|\___|  \__\___|  \_____|_|  \__,_|\___|_|\_\___|_|   
-                                                                                       
-                                                                                       
-Welcome to Pero's Academy!
-What are you coding today?
-Raydo is watching you! Dream Big
-BANNER
-
-EOF
-          echo "ASCII art greeting added."
-
   # Deployment job
   deploy:
     environment:
