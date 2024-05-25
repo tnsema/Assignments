@@ -8,6 +8,8 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -38,14 +40,158 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
+  # Summarize assignment registration status and create HTML files
+  summarize_and_create_html:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure REGISTER.md exists and contains Status column
+        run: |
+          echo "Checking and updating REGISTER.md files..."
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            register_file="$dir/REGISTER.md"
+            if [ ! -f "$register_file" ]; then
+              echo "Creating REGISTER.md in $dir"
+              echo -e "| Name | Status |\n|------|--------|" > "$register_file"
+            else
+              if ! grep -q "| Status |" "$register_file"; then
+                echo "Updating REGISTER.md in $dir"
+                sed -i '1s/$/| Status |/' "$register_file"
+                sed -i '2s/$/|--------|/' "$register_file"
+              fi
+            fi
+          done
+
+      - name: Summarize Registration Status
+        id: summarize
+        run: |
+          echo "Generating assignment registration leaderboard..."
+          summary="## Assignment Registration Leaderboard\n\n"
+          summary+="| Rank | Assignment | Status |\n"
+          summary+="|------|------------|--------|\n"
+          
+          declare -A status_priority=(
+            ["Completed"]=1
+            ["In Progress"]=2
+            ["Not Started"]=3
+          )
+          
+          leaderboard=()
+          
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            register_file="$dir/REGISTER.md"
+            if [ -f "$register_file" ]; then
+              assignment_name=$(basename "$dir")
+              status=$(grep -i "| Status |" "$register_file" | tail -n +3 | cut -d'|' -f3 | xargs)
+              case "$status" in
+                "In Progress")
+                  badge="![In Progress](https://img.shields.io/badge/status-in--progress-yellow)"
+                  ;;
+                "Completed")
+                  badge="![Completed](https://img.shields.io/badge/status-completed-brightgreen)"
+                  ;;
+                "Not Started")
+                  badge="![Not Started](https://img.shields.io/badge/status-not--started-lightgrey)"
+                  ;;
+                *)
+                  badge="![Unknown](https://img.shields.io/badge/status-unknown-lightgrey)"
+                  ;;
+              esac
+              priority=${status_priority["$status"]}
+              leaderboard+=("$priority|$assignment_name|$badge")
+            fi
+          done
+          
+          IFS=$'\n' sorted_leaderboard=($(sort <<<"${leaderboard[*]}"))
+          unset IFS
+          
+          rank=1
+          for entry in "${sorted_leaderboard[@]}"; do
+            IFS='|' read -r priority assignment_name badge <<< "$entry"
+            summary+="| $rank | $assignment_name | $badge |\n"
+            rank=$((rank + 1))
+          done
+          
+          echo "$summary" > summary.md
+          echo "Leaderboard generated successfully."
+
+      - name: Update Assignments README.md
+        run: |
+          echo "Updating Assignments README.md..."
+          cat summary.md > Pero-s-Academy/Assignments/README.md
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add Pero-s-Academy/Assignments/README.md
+          git add Pero-s-Academy/Assignments/*/REGISTER.md
+          git commit -m "Update assignment registration leaderboard and ensure REGISTER.md"
+          git push
+          echo "Assignments README.md updated."
+
+      - name: Generate HTML Files with Navigation Sidebar
+        run: |
+          echo "Generating HTML files for each assignment..."
+          sidebar="<nav><ul>"
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            assignment_name=$(basename "$dir")
+            sidebar+="<li><a href=\"$assignment_name.html\">$assignment_name</a></li>"
+          done
+          sidebar+="</ul></nav>"
+
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            assignment_name=$(basename "$dir")
+            register_file="$dir/REGISTER.md"
+            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main>$(cat $register_file | markdown)</main></body></html>"
+            echo "$html_content" > "$assignment_name.html"
+          done
+
+          # Generate index.html for the repo root directory
+          html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(cat Pero-s-Academy/Assignments/README.md | markdown)</main></body></html>"
+          echo "$html_content" > index.html
+
+          echo "HTML files generated successfully."
+          
+          git add *.html
+          git commit -m "Generate HTML files with navigation sidebar"
+          git push
+          echo "HTML files committed and pushed."
+
   # Deployment job
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build, summarize_and_create_html]
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # Validation job (optional but recommended)
+  validate:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate REGISTER.md Files
+        run: |
+          echo "Validating REGISTER.md files..."
+          for dir in $(ls -d Pero-s-Academy/Assignments/*/); do
+            register_file="$dir/REGISTER.md"
+            if [ -f "$register_file" ]; then
+              # Add validation logic here
+              if ! grep -q "| Status |" "$register_file"; then
+                echo "Error: $register_file does not contain Status column."
+                exit 1
+              fi
+            fi
+          done
+          echo "Validation complete."
