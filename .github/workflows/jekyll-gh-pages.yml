@@ -159,13 +159,65 @@ jobs:
             student_list=$(tail -n +3 "$register_file" | awk -F'|' '{print $2}' | xargs -I{} echo "<li>{}</li>")
             student_sidebar="<nav><h2>Registered Students</h2><ul>$student_list</ul></nav>"
             
-            html_content="<html><head><title>$assignment_name</title></head><body>$sidebar<main><h1>$assignment_name</h1>$(pandoc \"$task_file\" || echo \"Error processing $task_file\") $student_sidebar</main></body></html>"
+            html_content="<html>
+            <head>
+              <title>$assignment_name</title>
+              <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/carbon-components/10.48.0/css/carbon-components.min.css\">
+              <script src=\"https://cdnjs.cloudflare.com/ajax/libs/carbon-components/10.48.0/carbon-components.min.js\"></script>
+            </head>
+            <body>
+              <div class=\"bx--grid\">
+                <header class=\"bx--header\">
+                  <div class=\"bx--header__global\">
+                    <a class=\"bx--header__name\" href=\"#\">Assignments</a>
+                  </div>
+                </header>
+                <div class=\"bx--row\">
+                  <div class=\"bx--col\">
+                    $sidebar
+                  </div>
+                  <div class=\"bx--col\">
+                    <main class=\"bx--content\">
+                      <h1>$assignment_name</h1>
+                      $(pandoc \"$task_file\" || echo \"Error processing $task_file\")
+                      $student_sidebar
+                    </main>
+                  </div>
+                </div>
+              </div>
+            </body>
+            </html>"
             echo "$html_content" > "$assignment_name.html"
           done
 
           # Generate index.html for the repo root directory
           if [ -f "README.md" ]; then
-            html_content="<html><head><title>Assignments</title></head><body>$sidebar<main>$(pandoc README.md || echo \"Error processing README.md\")</main></body></html>"
+            html_content="<html>
+            <head>
+              <title>Assignments</title>
+              <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/carbon-components/10.48.0/css/carbon-components.min.css\">
+              <script src=\"https://cdnjs.cloudflare.com/ajax/libs/carbon-components/10.48.0/carbon-components.min.js\"></script>
+            </head>
+            <body>
+              <div class=\"bx--grid\">
+                <header class=\"bx--header\">
+                  <div class=\"bx--header__global\">
+                    <a class=\"bx--header__name\" href=\"#\">Assignments</a>
+                  </div>
+                </header>
+                <div class=\"bx--row\">
+                  <div class=\"bx--col\">
+                    $sidebar
+                  </div>
+                  <div class=\"bx--col\">
+                    <main class=\"bx--content\">
+                      $(pandoc README.md || echo \"Error processing README.md\")
+                    </main>
+                  </div>
+                </div>
+              </div>
+            </body>
+            </html>"
             echo "$html_content" > index.html
           else
             echo "Error: README.md does not exist in the repo root. Skipping index.html generation."
