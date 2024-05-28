@@ -18,7 +18,7 @@ This document maintains a list of students who have enrolled in the DevOps Pract
 | 007    | Malcolm Mukorera             | malcolm@skunkworks.africa               | Pending             | ...                                            |
 | 009    | Thobile Sema                 | thobile@gmail.com                      | Pending            | https://github.com/tnsema                                            |
 | 010      | Brandon Mloyi              |  brandon@skunkworks.africa                | Pending              | ...                                            |
-| ###        | Phethile Mahlangu                 | Phethilemahlangu25@gmail.com                       | Pending               | ...                                            |
+| 011        | Phethile Mahlangu                 | Phethilemahlangu25@gmail.com                       | Pending               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
