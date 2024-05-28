@@ -16,7 +16,7 @@ This document maintains a list of students who have enrolled in the DevOps Pract
 | 006        | Inacio                 | Inacio@skunkworks.africa                | Pending            |                                           |
 | 004        | Andre Mwamba        | a.mwamba@skunkworks.africa|pendiing...        | ...                                            |
 | 007    | Malcolm Mukorera             | malcolm@skunkworks.africa               | Pending             | ...                                            |
-| ?      | ...                 | ...                       | ...               | ...                                            |
+| 009    | Thobile Sema                 | thobile@gmail.com                      | Pending            | ...                                            |
 | ?       | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
 | ...        | ...                 | ...                       | ...               | ...                                            |
