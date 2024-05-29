@@ -7,7 +7,7 @@ Please register for the assignment by completing the following table:
 | **Name** | **Email**            | **GitHub Username** | **Upwork Profile**                                     | **Fiverr Profile**             |
 |----------|----------------------|---------------------|--------------------------------------------------------|--------------------------------|
 |raydo     |raydo@pero.co.za      |  burnt-exe          | https://www.upwork.com/freelancers/~01550ced89246ee66f | https://www.fiverr.com/raydo_m | 
-|          |                      |                     |                                                        |                                | 
+|Elie Loji |elie@slunkworks.africa |Elliott29 |https://www.upwork.com/freelancers/~013978c0dcf47453e6 |                                | 
 |          |                      |                     |                                                        |                                |           |          |                      |                     |                                                        |                                |
 |          |                      |                     |                                                        |                                |          
 |          |                      |                     |                                                        |                                | 
